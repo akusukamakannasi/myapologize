@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>I'm So Sorry, Chathrin</title>
+
+  <!-- Favicon (Sweet Heart Icon) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11d48'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+
+  <!-- Google Fonts: Playfair Display (Serif), Caveat (Handwritten), Plus Jakarta Sans (Modern Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+            },
+            creamy: '#FFFDF9',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Poppins', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            handwritten: ['Caveat', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-creamy text-slate-700 min-h-screen relative antialiased selection:bg-rose-200 selection:text-rose-900 overflow-x-hidden">
+
+  <!-- Floating Hearts Background Canvas -->
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- Ambient Glowing Blurs (Contained to prevent horizontal scrolling on mobile) -->
+  <div class="ambient-glow-container">
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <div class="ambient-glow-3"></div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 md:py-16 space-y-12 sm:space-y-16 md:space-y-20 pb-24">
+
+    <!-- ==================================================================== -->
+    <!-- 1. HERO HEADER SECTION                                              -->
+    <!-- ==================================================================== -->
+    <header class="text-center pt-2 sm:pt-6 md:pt-10 space-y-4 sm:space-y-6">
+      
+      <!-- Top Pill Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/85 border border-rose-200/80 shadow-xs backdrop-blur-md animate-gentle-bounce">
+        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+        <span class="text-xs sm:text-sm font-medium text-rose-700 tracking-wide">
+          A Letter Written Strictly From My Heart
+        </span>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="space-y-2 sm:space-y-3 px-2">
+        <h1 class="text-2xl sm:text-4xl md:text-6xl font-serif font-bold text-slate-800 leading-tight">
+          I'm Deeply Sorry, 
+          <span class="block mt-1 sm:inline text-rose-600 font-handwritten text-4xl sm:text-5xl md:text-7xl config-her-name break-words">
+            Chathrin
+          </span> 
+        </h1>
+        
+        <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-slate-600 font-normal leading-relaxed pt-1 sm:pt-2">
+          I made an unintentional mistake that hurt you and caused disappointment. Seeing you upset breaks my heart. 
+          I built this small sanctuary to take full ownership, validate how you feel, and ask for your grace.
+        </p>
+      </div>
+
+      <!-- Emotional Sub-Badge / Heartbeat -->
+      <div class="flex items-center justify-center gap-2 pt-1 text-rose-500/80 text-xs sm:text-sm">
+        <i data-lucide="heart" class="w-4 h-4 sm:w-5 sm:h-5 fill-rose-400 text-rose-500 animate-heart-beat"></i>
+        <span class="font-medium text-slate-500">Every word below is genuine and unhurried</span>
+      </div>
+
+      <!-- Gentle Scroll Down Cue -->
+      <div class="pt-3 sm:pt-6">
+        <a href="#letter-section" class="inline-flex flex-col items-center text-xs font-semibold uppercase tracking-wider text-rose-400 hover:text-rose-600 transition-colors py-2">
+          <span>Read my message</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 mt-1 animate-bounce"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- ==================================================================== -->
+    <!-- 2. "FROM MY HEART" APOLOGY LETTER SECTION                           -->
+    <!-- ==================================================================== -->
+    <section id="letter-section" class="scroll-mt-6 sm:scroll-mt-10">
+      <div class="letter-envelope rounded-2xl sm:rounded-3xl p-5 sm:p-10 md:p-14 relative overflow-hidden backdrop-blur-xl">
+
+        <!-- Envelope Decorative Header Stamp -->
+        <div class="flex items-center justify-between border-b border-rose-100 pb-4 sm:pb-6 mb-6 sm:mb-8 gap-2">
+          <div class="flex items-center gap-2.5 sm:gap-3">
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full wax-seal flex items-center justify-center text-white shadow-md shrink-0">
+              <i data-lucide="heart" class="w-4 h-4 sm:w-5 sm:h-5 fill-white"></i>
+            </div>
+            <div>
+              <p class="text-[11px] sm:text-xs font-semibold text-rose-700 tracking-wider uppercase">Personal & Sincere</p>
+              <p class="text-[10px] sm:text-xs text-slate-400">Written with remorse & care</p>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="text-[11px] sm:text-xs font-medium px-2.5 py-1 sm:px-3 sm:py-1 bg-rose-50 text-rose-600 rounded-full border border-rose-100">
+              For You Always
+            </span>
+          </div>
+        </div>
+
+        <!-- The Letter Body -->
+        <div class="space-y-4 sm:space-y-6 text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed">
+          
+          <p class="font-serif italic text-lg sm:text-2xl text-slate-800">
+            Dearest <span class="config-her-name text-rose-600 font-semibold not-italic">Chathrin</span>,
+          </p>
+
+          <!-- Direct Admission of the Mistake -->
+          <p>
+            First and foremost, I want to say this clearly and directly without hiding behind excuses: 
+            <strong class="text-slate-900 font-semibold">I was wrong, and I am truly sorry.</strong> 
+            I accidentally showed and revealed something to you that I never should have. It was clumsy, 
+            thoughtless, and completely my fault.
+          </p>
+
+          <!-- Validating Her Feelings -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-rose-50/85 border border-rose-100 text-slate-700 space-y-1.5 sm:space-y-2">
+            <div class="flex items-center gap-2 text-rose-700 font-semibold text-xs sm:text-sm uppercase tracking-wide">
+              <i data-lucide="shield-alert" class="w-4 h-4 shrink-0"></i>
+              <span>Your Feelings Are 100% Valid</span>
+            </div>
+            <p class="text-xs sm:text-base leading-relaxed text-slate-600">
+              I'm so sorry for triggering those uncomfortable thoughts and insecurities again. Making you feel that way was the last thing I wanted to do, and I feel deeply guilty. I am truly, deeply sorry.
+            </p>
+          </div>
+
+          <!-- Deep Regret & Self-Reflection -->
+          <p>
+            I know I can't simply erase what happened, no matter how much I wish I could. I've replayed that moment in my head so many times, wishing I had been more thoughtful toward you from the start.
+          </p>
+
+          <!-- Genuine Promise for the Future -->
+          <p>
+            Your feelings really matter to me, and I should have been much more careful from the start. I'm committed to being more attentive and respectful in the future, and I hope I can slowly earn back your trust.
+          </p>
+
+          <!-- Handwritten Sign-off -->
+          <div class="pt-5 sm:pt-6 border-t border-rose-100 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <p class="text-xs sm:text-sm text-slate-500 italic">With all my sincerity, regret, and care,</p>
+              <p class="font-handwritten text-2xl sm:text-4xl text-rose-600 font-bold mt-1 config-his-name">
+                Yours Sincerely
+              </p>
+            </div>
+
+            <!-- Virtual Hug Trigger Button inside the letter -->
+            <button id="send-hug-btn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 rounded-full bg-white text-rose-600 border border-rose-200 shadow-xs hover:shadow-md hover:bg-rose-50 active:scale-95 transition-all text-xs sm:text-sm font-semibold touch-manipulation">
+              <i data-lucide="sparkles" class="w-4 h-4 text-rose-500"></i>
+              <span>Tap to Send a Virtual Hug🤗</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- 3 Sincere Vows -->
+        <div class="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-rose-100/70">
+          <h3 class="text-[11px] sm:text-xs uppercase font-bold tracking-widest text-slate-400 mb-3 sm:mb-4 text-center sm:text-left">
+            My Three Promises To You:
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+            <div class="p-3.5 sm:p-4 rounded-xl bg-white/75 border border-rose-100/80 shadow-xs text-center sm:text-left">
+              <span class="text-xl">🌸</span>
+              <h4 class="font-semibold text-slate-800 text-xs sm:text-sm mt-1">Deep Mindfulness</h4>
+              <p class="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-snug">Pausing to think and guard your feelings before acting.</p>
+            </div>
+            <div class="p-3.5 sm:p-4 rounded-xl bg-white/75 border border-rose-100/80 shadow-xs text-center sm:text-left">
+              <span class="text-xl">🤍</span>
+              <h4 class="font-semibold text-slate-800 text-xs sm:text-sm mt-1">Rebuilding Trust</h4>
+              <p class="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-snug">Proving my respect through consistent actions over time.</p>
+            </div>
+            <div class="p-3.5 sm:p-4 rounded-xl bg-white/75 border border-rose-100/80 shadow-xs text-center sm:text-left">
+              <span class="text-xl">🕊️</span>
+              <h4 class="font-semibold text-slate-800 text-xs sm:text-sm mt-1">Infinite Patience</h4>
+              <p class="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-snug">Giving you room to feel and heal without any rush or pressure.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- 3. INTERACTIVE: "THINGS I TRULY APPRECIATE ABOUT YOU"                       -->
+    <!-- ==================================================================== -->
+    <section class="space-y-4 sm:space-y-6">
+      <div class="text-center space-y-1.5 sm:space-y-2 px-2">
+        <h2 class="text-xl sm:text-3xl md:text-4xl font-serif font-bold text-slate-800">
+          Things I Truly Appreciate About You
+        </h2>
+        <p class="text-xs sm:text-base text-slate-500 max-w-lg mx-auto">
+          Tap each card to reveal things I truly appreciate about you.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-6">
+        
+        <!-- Card 1 -->
+        <div class="reason-card glass-card-interactive p-4 sm:p-6 rounded-2xl cursor-pointer group">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 group-hover:scale-110 transition-transform shrink-0">
+                <i data-lucide="smile" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+              </div>
+              <div>
+                <span class="text-[10px] sm:text-xs font-semibold text-rose-500 uppercase tracking-wider">01. Pure Joy</span>
+                <h3 class="text-base sm:text-lg font-bold text-slate-800 leading-snug">Your Radiant Smile</h3>
+              </div>
+            </div>
+            <i data-lucide="chevron-down" class="reason-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 mt-1"></i>
+          </div>
+          <div class="reason-card-body card-content-hidden mt-3 sm:mt-4 pt-3 border-t border-rose-100/70 text-slate-600 text-xs sm:text-sm leading-relaxed">
+            Your smile can brighten even my heaviest days. Seeing you laugh and feel at ease is the most rewarding 
+            feeling in the world. Losing that smile today because of my own mistake hurt more than anything, and 
+            I want to do everything I can to bring it back.
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="reason-card glass-card-interactive p-4 sm:p-6 rounded-2xl cursor-pointer group">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 group-hover:scale-110 transition-transform shrink-0">
+                <i data-lucide="sparkle" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+              </div>
+              <div>
+                <span class="text-[10px] sm:text-xs font-semibold text-rose-500 uppercase tracking-wider">02. Warmth</span>
+                <h3 class="text-base sm:text-lg font-bold text-slate-800 leading-snug">Your Gentle Kindness</h3>
+              </div>
+            </div>
+            <i data-lucide="chevron-down" class="reason-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 mt-1"></i>
+          </div>
+          <div class="reason-card-body card-content-hidden mt-3 sm:mt-4 pt-3 border-t border-rose-100/70 text-slate-600 text-xs sm:text-sm leading-relaxed">
+            The empathy and sweetness in the way you treat the world is something so rare. You have such a pure, 
+            tender heart, which makes me feel even more remorseful that I caused it pain. You deserve that same 
+            tenderness returned to you every single day.
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="reason-card glass-card-interactive p-4 sm:p-6 rounded-2xl cursor-pointer group">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 group-hover:scale-110 transition-transform shrink-0">
+                <i data-lucide="home" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+              </div>
+              <div>
+                <span class="text-[10px] sm:text-xs font-semibold text-rose-500 uppercase tracking-wider">03. Peace</span>
+                <h3 class="text-base sm:text-lg font-bold text-slate-800 leading-snug">Our Safe Space</h3>
+              </div>
+            </div>
+            <i data-lucide="chevron-down" class="reason-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 mt-1"></i>
+          </div>
+          <div class="reason-card-body card-content-hidden mt-3 sm:mt-4 pt-3 border-t border-rose-100/70 text-slate-600 text-xs sm:text-sm leading-relaxed">
+            Talking with you and sharing moments with you gives me a sense of peace that I don't feel anywhere else. 
+            You are my safe space, and it hurts that I momentarily breached yours. I want to protect that comfort 
+            between us forever.
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="reason-card glass-card-interactive p-4 sm:p-6 rounded-2xl cursor-pointer group">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 group-hover:scale-110 transition-transform shrink-0">
+                <i data-lucide="star" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+              </div>
+              <div>
+                <span class="text-[10px] sm:text-xs font-semibold text-rose-500 uppercase tracking-wider">04. One Of One</span>
+                <h3 class="text-base sm:text-lg font-bold text-slate-800 leading-snug">You Are Irreplaceable</h3>
+              </div>
+            </div>
+            <i data-lucide="chevron-down" class="reason-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 mt-1"></i>
+          </div>
+          <div class="reason-card-body card-content-hidden mt-3 sm:mt-4 pt-3 border-t border-rose-100/70 text-slate-600 text-xs sm:text-sm leading-relaxed">
+            There is genuinely nobody else like you. Your mind, your quirks, your laughter, and the way you see life 
+            are priceless. That's why making this right matters so deeply to me—because losing your closeness is 
+            something I never want to experience.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- 4. THE FORGIVENESS COMPONENT                                        -->
+    <!-- ==================================================================== -->
+    <section class="pt-2 sm:pt-4 pb-6 sm:pb-10">
+      
+      <!-- Card State 1: The Question -->
+      <div id="forgiveness-card" class="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center space-y-6 sm:space-y-8 glow-border relative overflow-hidden">
+        
+        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center shadow-inner animate-gentle-float">
+          <i data-lucide="heart-handshake" class="w-6 h-6 sm:w-8 sm:h-8"></i>
+        </div>
+
+        <div class="space-y-2 sm:space-y-3 px-2">
+          <h2 class="text-xl sm:text-3xl md:text-4xl font-serif font-bold text-slate-800">
+            Will you forgive me?
+          </h2>
+          <p class="text-slate-600 max-w-md mx-auto text-xs sm:text-base leading-relaxed">
+            Take all the time you need. Your peace matters far more than my urgency. But whenever your heart is ready...
+          </p>
+        </div>
+
+        <!-- Interactive Decision Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 pt-1 max-w-md mx-auto">
+          
+          <!-- Button 1: Yes, I forgive you -->
+          <button id="forgive-yes-btn" class="w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 rounded-full bg-rose-600 hover:bg-rose-500 active:bg-rose-700 text-white font-semibold shadow-lg shadow-rose-600/30 hover:shadow-rose-600/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 sm:gap-3 group text-sm sm:text-base touch-manipulation">
+            <i data-lucide="heart" class="w-4 h-4 sm:w-5 sm:h-5 fill-white text-white group-hover:scale-125 transition-transform"></i>
+            <span>Yes, I forgive you</span>
+          </button>
+
+          <!-- Button 2: I still need time (Playful & Gentle Dodge) -->
+          <button id="need-time-btn" class="w-full sm:w-auto px-5 py-3 sm:px-7 sm:py-3.5 rounded-full bg-white/95 hover:bg-white text-slate-600 hover:text-rose-600 border border-rose-200/90 font-medium text-xs sm:text-sm transition-all shadow-xs touch-manipulation text-center">
+            <span>I still need time🥺</span>
+          </button>
+
+        </div>
+
+        <p class="text-[11px] sm:text-xs text-slate-400 px-2">
+          (No matter what you choose, I respect your feelings and will always be here for you.)
+        </p>
+      </div>
+
+      <!-- Card State 2: Celebration / Gratitude Note (Hidden initially) -->
+      <div id="forgiveness-success-card" class="hidden glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center space-y-5 sm:space-y-6 glow-border relative overflow-hidden bg-white/90">
+        
+        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-rose-500 text-white flex items-center justify-center shadow-lg shadow-rose-500/30 animate-gentle-bounce">
+          <i data-lucide="heart" class="w-8 h-8 sm:w-10 sm:h-10 fill-white text-white"></i>
+        </div>
+
+        <div class="space-y-2 sm:space-y-3 px-2">
+          <span class="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-rose-100 text-rose-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+            From the bottom of my heart
+          </span>
+          <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-slate-800">
+            Thank You For Your Grace🌸
+          </h2>
+          <p class="text-slate-600 max-w-lg mx-auto text-sm sm:text-lg leading-relaxed">
+            Your forgiveness means so much to me. I'll be far more mindful and never take your trust for granted.
+          </p>
+        </div>
+
+        <div class="p-4 sm:p-6 rounded-2xl bg-rose-50/70 border border-rose-100 max-w-md mx-auto text-xs sm:text-sm text-rose-800 font-medium leading-relaxed">
+          "Actions speak louder than words. I'll prove my sincerity through my actions."
+        </div>
+
+        <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <button id="celebrate-more-btn" class="w-full sm:w-auto px-6 py-3 sm:px-7 sm:py-3.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white font-semibold shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 text-xs sm:text-sm touch-manipulation">
+            <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+            <span>Send Another Hug & Confetti</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Footer Note -->
+    <footer class="text-center pt-6 sm:pt-8 border-t border-rose-100/60 text-slate-400 text-xs sm:text-sm space-y-1.5 sm:space-y-2 pb-6">
+      <p>
+        Made with sincere regret and respect for 
+        <span class="config-her-name text-rose-600 font-semibold">Chathrin</span>.
+      </p>
+      <p class="text-[10px] sm:text-[11px] text-slate-400">
+        "Understanding starts with truly listening and learning from mistakes."
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- ==================================================================== -->
+  <!-- 5. FLOATING AUDIO / VIBE TOGGLE WIDGET (BOTTOM CORNER)               -->
+  <!-- ==================================================================== -->
+  <aside id="floating-audio-widget" class="fixed z-50 flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-white/95 border border-rose-200/90 shadow-xl shadow-rose-500/10 backdrop-blur-md transition-all hover:shadow-rose-500/20 active:scale-95 touch-manipulation cursor-pointer">
+    
+    <!-- Music Equalizer Animated Bars -->
+    <div class="flex items-end gap-1 h-3.5 sm:h-4">
+      <div class="eq-bar h-1"></div>
+      <div class="eq-bar h-2"></div>
+      <div class="eq-bar h-1.5"></div>
+      <div class="eq-bar h-3"></div>
+    </div>
+
+    <!-- Label & Status (always clean & legible) -->
+    <div class="text-left">
+      <p id="audio-status-text" class="text-[11px] sm:text-xs font-semibold text-slate-700 leading-none">Soft Melody</p>
+      <p class="text-[9px] sm:text-[10px] text-slate-400 leading-none mt-0.5">Peaceful Ambiance</p>
+    </div>
+
+    <!-- Play/Pause Button -->
+    <button id="audio-toggle-btn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-rose-50 hover:bg-rose-100 flex items-center justify-center transition-colors shadow-xs ml-1" title="Play gentle soothing music">
+      <i data-lucide="play" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-600 fill-rose-600 ml-0.5"></i>
+    </button>
+  </aside>
+
+  <!-- Script logic -->
+  <script src="script.js"></script>
+</body>
+</html>
